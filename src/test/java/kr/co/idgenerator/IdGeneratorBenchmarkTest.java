@@ -3,7 +3,6 @@ package kr.co.idgenerator;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IdGeneratorBenchmarkTest {
     private static final int THREAD_POOL_SIZE = 10;
-    private static final int TOTAL_BENCHMARK_SIZE = 5_000_000; // 총 500만건 테스트
+    private static final int TOTAL_BENCHMARK_SIZE = 10_000_000; // 총 1000만건 테스트
     private static final Map<String, List<BenchmarkResult>> results = new HashMap<>();
     private static Connection conn;
 
@@ -86,7 +85,7 @@ public class IdGeneratorBenchmarkTest {
         // 테이블 초기화
         truncateTable(generatorName);
 
-        // 총 500만건을 batchSize씩 나눠서 INSERT (누적)
+        // 총 1000만건을 batchSize씩 나눠서 INSERT (누적)
         final int iterations = TOTAL_BENCHMARK_SIZE / batchSize;
         for (int i = 0; i < iterations; i++) {
             // ID 생성 시간 측정
